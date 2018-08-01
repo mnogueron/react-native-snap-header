@@ -309,7 +309,7 @@
 		00E356F21AD99517003FC87E /* ReactNativeSnapHeaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactNativeSnapHeaderTests.m; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* ReactNativeSnapHeader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactNativeSnapHeader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* react-native-snap-header.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "react-native-snap-header.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "react-native-snap-header/AppDelegate.h"; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "react-native-snap-header/AppDelegate.m"; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -543,7 +543,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* ReactNativeSnapHeader.app */,
+				13B07F961A680F5B00A75B9A /* react-native-snap-header.app */,
 				00E356EE1AD99517003FC87E /* react-native-snap-header-tests.xctest */,
 			);
 			name = Products;
@@ -594,7 +594,7 @@
 			);
 			name = "react-native-snap-header";
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* ReactNativeSnapHeader.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* react-native-snap-header.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1029,7 +1029,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ReactNativeSnapHeaderTests/Info.plist;
+				INFOPLIST_FILE = "react-native-snap-header-tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1038,7 +1038,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.reactnativesnapheader.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactNativeSnapHeader.app/ReactNativeSnapHeader";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/react-native-snap-header.app/react-native-snap-header";
 			};
 			name = Debug;
 		};
@@ -1047,7 +1047,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = ReactNativeSnapHeaderTests/Info.plist;
+				INFOPLIST_FILE = "react-native-snap-header-tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1056,7 +1056,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.reactnativesnapheader.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactNativeSnapHeader.app/ReactNativeSnapHeader";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/react-native-snap-header.app/react-native-snap-header";
 			};
 			name = Release;
 		};
@@ -1066,7 +1066,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = ReactNativeSnapHeader/Info.plist;
+				INFOPLIST_FILE = "react-native-snap-header/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1074,7 +1074,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.reactnativesnapheader.app;
-				PRODUCT_NAME = ReactNativeSnapHeader;
+				PRODUCT_NAME = "react-native-snap-header";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1084,7 +1084,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = ReactNativeSnapHeader/Info.plist;
+				INFOPLIST_FILE = "react-native-snap-header/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1092,7 +1092,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.reactnativesnapheader.app;
-				PRODUCT_NAME = ReactNativeSnapHeader;
+				PRODUCT_NAME = "react-native-snap-header";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1134,6 +1134,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reactnativesnapheader.app;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1168,6 +1169,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reactnativesnapheader.app;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
