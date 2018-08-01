@@ -1,3 +1,3 @@
-rootProject.name = 'ReactNativeSnapHeader'
+rootProject.name = 'react-native-snap-header'
 
 include ':app'
