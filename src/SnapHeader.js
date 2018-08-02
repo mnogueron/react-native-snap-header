@@ -4,133 +4,142 @@ import { StyleSheet, Text, View, Animated } from 'react-native'
 
 class HeaderTest extends Component {
 
-  state = {
-      scrollY: new Animated.Value(0),
-      startDragY: 0,
-      lastScrollToY: 0,
-  }
+    state = {
+        scrollY: new Animated.Value(0),
+    }
 
-  headerOpen = true
+    headerOpen = true
 
-  isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
-      const paddingToBottom = 20
-      return layoutMeasurement.height + contentOffset.y >=
+    startDragY = 0
+    lastScrollToY = 0
+    isScrolling = false
+
+    isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
+        const paddingToBottom = 20
+        return layoutMeasurement.height + contentOffset.y >=
            contentSize.height - paddingToBottom
-  }
+    }
 
-  onScrollBeginDrag = event => this.setState({ startDragY: event.nativeEvent.contentOffset.y })
+    onScrollBeginDrag = event => this.startDragY = event.nativeEvent.contentOffset.y
 
-  onScrollEndSnapToEdge = event => {
-      const { startDragY, lastScrollToY } = this.state
-      const { minHeight, maxHeight, percentToClose } = this.props
-      const scrollRange = maxHeight - minHeight
+    onScrollEndSnapToEdge = event => {
 
-      const y = event.nativeEvent.contentOffset.y
+        if (this.isScrolling) {
+            this.isScrolling = false
+            return
+        }
 
-      if (this._scrollView) {
-          console.log('start onScrollEndSnapToEdge', startDragY, y, this.headerOpen)
-          let toY = null
+        const startDragY = this.startDragY
+        const { minHeight, maxHeight, percentToClose } = this.props
+        const scrollRange = maxHeight - minHeight
 
-          if (this.headerOpen) {
-              if (startDragY < y && y < startDragY + scrollRange * percentToClose) {
-                  toY = startDragY
-              } else if (startDragY + scrollRange * percentToClose <= y && y < startDragY + scrollRange
+        const y = event.nativeEvent.contentOffset.y
+
+        if (this._scrollView) {
+            console.log('start onScrollEndSnapToEdge', startDragY, y, this.headerOpen)
+            let toY = null
+
+            if (this.headerOpen) {
+                if (startDragY < y && y < startDragY + scrollRange * percentToClose) {
+                    toY = startDragY
+                } else if (startDragY + scrollRange * percentToClose <= y && y < startDragY + scrollRange
                    && !this.isCloseToBottom(event.nativeEvent)) {
-                  toY = startDragY + scrollRange
-              }
+                    toY = startDragY + scrollRange
+                }
 
-              if (y >= startDragY + scrollRange * percentToClose
+                if (y >= startDragY + scrollRange * percentToClose
                   && !this.isCloseToBottom(event.nativeEvent)) {
-                  this.headerOpen = false
-              }
-          }
-          else {
-              if (startDragY - scrollRange * (1 - percentToClose) < y && y < startDragY) {
-                  toY = startDragY
-              } else if (startDragY - scrollRange < y && y <= startDragY - scrollRange * (1 - percentToClose)) {
-                  toY = startDragY - scrollRange
-              }
+                    this.headerOpen = false
+                }
+            }
+            else {
+                if (startDragY - scrollRange * (1 - percentToClose) < y && y < startDragY) {
+                    toY = startDragY
+                } else if (startDragY - scrollRange < y && y <= startDragY - scrollRange * (1 - percentToClose)) {
+                    toY = startDragY - scrollRange
+                }
 
-              if (y <= startDragY - scrollRange * (1 - percentToClose)) {
-                  this.headerOpen = true
-              }
-          }
+                if (y <= startDragY - scrollRange * (1 - percentToClose)) {
+                    this.headerOpen = true
+                }
+            }
 
-          console.log('attempt scrolling to ' + Math.round(toY) + ' with last scrollToY ' + lastScrollToY)
+            console.log('attempt scrolling to ' + Math.round(toY) + ' with last scrollToY ' + this.lastScrollToY)
 
-          // Don't scroll infinitely to the same Y
-          if (toY || toY === 0) {
-              this._scrollView.scrollTo({ y: Math.round(toY), animated: true })
-              this.setState({ lastScrollToY: toY })
-              console.log('scrollTo', Math.round(toY))
-          }
-          console.log('stop onScrollEndSnapToEdge', this.headerOpen)
-      }
-  }
+            // Don't scroll infinitely to the same Y
+            if (toY !== null) {
+                this.isScrolling = true
+                this.lastScrollToY = toY
+                this._scrollView.scrollTo({ y: Math.round(toY), animated: true })
+                console.log('scrollTo', Math.round(toY))
+            }
+            console.log('stop onScrollEndSnapToEdge', this.headerOpen)
+        }
+    }
 
-  render() {
-      const { minHeight, maxHeight, headerComponent } = this.props
-      const { scrollY, startDragY } = this.state
-      const scrollRange = maxHeight - minHeight
+    render() {
+        const { minHeight, maxHeight, headerComponent } = this.props
+        const { scrollY } = this.state
+        const startDragY = this.startDragY
+        const scrollRange = maxHeight - minHeight
 
-      console.log('Rerender', scrollY, startDragY)
+        console.log('Rerender', scrollY, startDragY)
 
-      const animationRange = scrollY.interpolate({
-          inputRange: this.headerOpen ?
-              [ startDragY, startDragY + scrollRange ] :
-              [ startDragY - scrollRange, startDragY ],
-          outputRange: [ 0, 1 ],
-          extrapolate: 'clamp',
-      })
+        const animationRange = scrollY.interpolate({
+            inputRange: this.headerOpen ?
+                [ startDragY, startDragY + scrollRange ] :
+                [ startDragY - scrollRange, startDragY ],
+            outputRange: [ 0, 1 ],
+            extrapolate: 'clamp',
+        })
 
-      const animateHeader = {
-          transform: [
-              {
-                  translateY: animationRange.interpolate({
-                      inputRange: [ 0, 1 ],
-                      outputRange: [ 0, -scrollRange ],
-                  }),
-              },
-          ],
-      }
+        const animateHeader = {
+            transform: [
+                {
+                    translateY: animationRange.interpolate({
+                        inputRange: [ 0, 1 ],
+                        outputRange: [ 0, -scrollRange ],
+                    }),
+                },
+            ],
+        }
 
-      return (
-          <View style={ styles.container }>
+        return (
+            <View style={ styles.container }>
 
-              <Animated.ScrollView
-                  style={ styles.scrollView }
-                  ref={ scrollView => this._scrollView = scrollView ? scrollView._component : null }
-                  onScrollEndDrag={ this.onScrollEndSnapToEdge }
-                  onScrollBeginDrag={ this.onScrollBeginDrag }
-                  onMomentumScrollEnd={ this.onScrollEndSnapToEdge }
-                  onScroll={ Animated.event(
-                      [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
-                      { useNativeDriver: true }
-                  ) }
-                  scrollEventThrottle={ 16 }
-              >
-                  <View style={{ flex: 0, height: maxHeight }} />
-                  {
-                      Array.apply(null, { length: 40 }).map(Number.call, Number).map((item) => (
-                          <View
-                              key={ item }
-                              style={ [ styles.item, item % 2 === 1 && { backgroundColor: '#ffffff' } ] }
-                          >
-                              <Text>
-                                  { item }
-                              </Text>
-                          </View>
-                      ))
-                  }
-              </Animated.ScrollView>
+                <Animated.ScrollView
+                    style={ styles.scrollView }
+                    ref={ scrollView => this._scrollView = scrollView ? scrollView._component : null }
+                    onScrollEndDrag={ this.onScrollEndSnapToEdge }
+                    onScrollBeginDrag={ this.onScrollBeginDrag }
+                    onMomentumScrollEnd={ this.onScrollEndSnapToEdge }
+                    onScroll={ Animated.event(
+                        [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
+                        { useNativeDriver: true }
+                    ) }
+                    scrollEventThrottle={ 16 }
+                >
+                    <View style={{ flex: 0, height: maxHeight }} />
+                    {
+                        Array.apply(null, { length: 40 }).map(Number.call, Number).map((item) => (
+                            <View
+                                key={ item }
+                                style={ [ styles.item, item % 2 === 1 && { backgroundColor: '#ffffff' } ] }
+                            >
+                                <Text>
+                                    { item }
+                                </Text>
+                            </View>
+                        ))
+                    }
+                </Animated.ScrollView>
 
-              <Animated.View style={ [ styles.headerBackground, { height: maxHeight }, animateHeader ] }>
-                  { headerComponent }
-              </Animated.View>
-          </View>
-      )
-  }
-
+                <Animated.View style={ [ styles.headerBackground, { height: maxHeight }, animateHeader ] }>
+                    { headerComponent }
+                </Animated.View>
+            </View>
+        )
+    }
 }
 
 HeaderTest.propTypes = {
