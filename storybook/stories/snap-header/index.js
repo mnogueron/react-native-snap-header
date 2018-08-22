@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 
 storiesOf('SnapHeader', module)
     .addDecorator(withKnobs)
-    .add('Basic', () => (
+    .add('Simple', () => (
         <SnapHeader
             headerComponent={ (
                 <View style={{ backgroundColor: '#0084FF', flex: 1 }}>
@@ -38,4 +38,52 @@ storiesOf('SnapHeader', module)
                 ))
             }
         </SnapHeader>
+    ))
+    .add('Double', () => (
+        <View style={{ flex: 1 }}>
+            <SnapHeader
+                headerComponent={ (
+                    <View style={{ backgroundColor: '#0084FF', flex: 1 }}>
+                        <Text>Hey</Text>
+                    </View>
+                ) }
+                minHeight={ number('Minimum header size 1', 50) }
+                maxHeight={ number('Maximum header size 1', 200) }
+                percentToClose={ number('Percent to close 1', 0.5) }
+                style={{ flex: 0.5 }}
+            >
+                {
+                    Array.apply(null, { length: 40 }).map(Number.call, Number).map((item) => (
+                        <View
+                            key={ item }
+                            style={ [ styles.item, item % 2 === 1 && { backgroundColor: '#ffffff' } ] }
+                        >
+                            <Text>A { item }</Text>
+                        </View>
+                    ))
+                }
+            </SnapHeader>
+            <SnapHeader
+                headerComponent={ (
+                    <View style={{ backgroundColor: '#8EC449', flex: 1 }}>
+                        <Text>Hey</Text>
+                    </View>
+                ) }
+                minHeight={ number('Minimum header size 2', 50) }
+                maxHeight={ number('Maximum header size 2', 200) }
+                percentToClose={ number('Percent to close 2', 0.5) }
+                style={{ flex: 0.5 }}
+            >
+                {
+                    Array.apply(null, { length: 40 }).map(Number.call, Number).map((item) => (
+                        <View
+                            key={ item }
+                            style={ [ styles.item, item % 2 === 1 && { backgroundColor: '#ffffff' } ] }
+                        >
+                            <Text>B { item }</Text>
+                        </View>
+                    ))
+                }
+            </SnapHeader>
+        </View>
     ))

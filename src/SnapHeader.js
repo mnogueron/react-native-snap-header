@@ -76,7 +76,7 @@ class SnapHeader extends React.PureComponent {
     }
 
     render() {
-        const { minHeight, maxHeight, headerComponent, children } = this.props
+        const { minHeight, maxHeight, headerComponent, children, style } = this.props
         const { scrollY, startDragY } = this.state
         const scrollRange = maxHeight - minHeight
 
@@ -102,7 +102,7 @@ class SnapHeader extends React.PureComponent {
         }
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={ [{ flex: 1 }, style ] }>
                 <Animated.ScrollView
                     style={{ flex: 1 }}
                     ref={ scrollView => this._scrollView = scrollView ? scrollView._component : null }
@@ -132,6 +132,7 @@ SnapHeader.propTypes = {
     maxHeight: PropTypes.number,
     headerComponent: PropTypes.element,
     percentToClose: PropTypes.number,
+    style: PropTypes.any,
 }
 
 SnapHeader.defaultProps = {
