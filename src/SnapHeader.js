@@ -75,6 +75,16 @@ class SnapHeader extends React.PureComponent {
         }
     }
 
+    // TODO implement
+    expandHeader = () => {
+
+    }
+
+    // TODO implement
+    collapseHeader = () => {
+
+    }
+
     render() {
         const { minHeight, maxHeight, headerComponent, children, style } = this.props
         const { scrollY, startDragY } = this.state
