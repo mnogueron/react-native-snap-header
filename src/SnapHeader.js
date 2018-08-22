@@ -102,7 +102,7 @@ class SnapHeader extends React.PureComponent {
         }
 
         return (
-            <View style={ [{ flex: 1 }, style ] }>
+            <View style={ [ styles.container, style ] }>
                 <Animated.ScrollView
                     style={{ flex: 1 }}
                     ref={ scrollView => this._scrollView = scrollView ? scrollView._component : null }
@@ -137,11 +137,15 @@ SnapHeader.propTypes = {
 
 SnapHeader.defaultProps = {
     minHeight: 50,
-    maxHeight: 200,
+    maxHeight: 150,
     percentToClose: 0.5,
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        overflow: 'hidden',
+    },
     header: {
         position: 'absolute',
         flex: 0,

@@ -24,7 +24,7 @@ storiesOf('SnapHeader', module)
                 </View>
             ) }
             minHeight={ number('Minimum header size', 50) }
-            maxHeight={ number('Maximum header size', 200) }
+            maxHeight={ number('Maximum header size', 150) }
             percentToClose={ number('Percent to close', 0.5) }
         >
             {
@@ -48,7 +48,7 @@ storiesOf('SnapHeader', module)
                     </View>
                 ) }
                 minHeight={ number('Minimum header size 1', 50) }
-                maxHeight={ number('Maximum header size 1', 200) }
+                maxHeight={ number('Maximum header size 1', 150) }
                 percentToClose={ number('Percent to close 1', 0.5) }
                 style={{ flex: 0.5 }}
             >
@@ -70,7 +70,7 @@ storiesOf('SnapHeader', module)
                     </View>
                 ) }
                 minHeight={ number('Minimum header size 2', 50) }
-                maxHeight={ number('Maximum header size 2', 200) }
+                maxHeight={ number('Maximum header size 2', 150) }
                 percentToClose={ number('Percent to close 2', 0.5) }
                 style={{ flex: 0.5 }}
             >
