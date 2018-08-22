@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { storiesOf } from '@storybook/react-native'
 import { SnapHeader } from 'react-native-snap-header'
+import { withKnobs, number } from '@storybook/addon-knobs'
 
 const styles = StyleSheet.create({
     item: {
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
 })
 
 storiesOf('SnapHeader', module)
+    .addDecorator(withKnobs)
     .add('Basic', () => (
         <SnapHeader
             headerComponent={ (
@@ -21,6 +23,9 @@ storiesOf('SnapHeader', module)
                     <Text>Hey</Text>
                 </View>
             ) }
+            minHeight={ number('Minimum header size', 50) }
+            maxHeight={ number('Maximum header size', 200) }
+            percentToClose={ number('Percent to close', 0.5) }
         >
             {
                 Array.apply(null, { length: 40 }).map(Number.call, Number).map((item) => (
